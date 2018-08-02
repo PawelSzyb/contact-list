@@ -1,9 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const contacts = require("./routes/api/contacts");
 
 const app = express();
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
 
 // db config
 const db = require("./config/keys").mongoURI;

@@ -12,7 +12,7 @@ class NavBar extends Component {
           <NavLink className="nav-link" to="/">
             <Icon large>home</Icon>home
           </NavLink>
-          <NavLink className="nav-link" to="/">
+          <NavLink className="nav-link" to="/contact-add">
             <Icon large>add</Icon>add
           </NavLink>
           <NavLink className="nav-link" to="/">

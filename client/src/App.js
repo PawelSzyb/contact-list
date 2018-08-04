@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import { Provider } from "react-redux";
+import store from "./store";
+
 import NavBar from "./components/layout/NavBar";
+import ContactAdd from "./components/forms/ContactAdd";
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <NavBar style={{ width: "100%" }} />
-          <Route exact path="/" />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <NavBar style={{ width: "100%" }} />
+            <Route exact path="/" />
+            <Route exact path="/contact-add" component={ContactAdd} />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

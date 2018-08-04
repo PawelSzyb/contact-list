@@ -1,0 +1,36 @@
+.navbar {
+  background-color: #b71c1c;
+}
+.nav-link {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  text-transform: uppercase;
+}
+.nav-link:nth-child(1) {
+  margin-top: 20px;
+}
+.nav-link i {
+  margin-right: 15px;
+}
+
+@media (min-width: 993px) {
+  .navbar-content {
+    width: 300px;
+    flex-direction: row;
+    display: flex;
+    margin-right: 30px;
+    align-items: center;
+    height: 64px;
+  }
+  .navbar {
+    padding-left: 15px;
+  }
+  .nav-link {
+    color: #fff;
+  }
+  .nav-link:nth-child(1) {
+    margin-top: 0;
+  }
+}

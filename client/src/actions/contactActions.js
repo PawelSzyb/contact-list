@@ -13,7 +13,7 @@ export const getContacts = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_CONTACTS,
-        payload: null
+        payload: {}
       })
     );
 };
@@ -28,4 +28,11 @@ export const addContact = (contactData, history) => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+export const deleteContact = id => dispatch => {
+  axios
+    .delete(`api/contacts/${id}`)
+    .then(res => dispatch(getContacts()))
+    .catch(err => console.log(err));
 };

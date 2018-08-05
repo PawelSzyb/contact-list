@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Collapsible, CollapsibleItem, Container } from "react-materialize";
+import { Link } from "react-router-dom";
 
-import { getContacts } from "../../actions/contactActions";
+import {
+  Collapsible,
+  CollapsibleItem,
+  Container,
+  Icon
+} from "react-materialize";
+import "./ContactList.css";
+
+import { getContacts, deleteContact } from "../../actions/contactActions";
 
 class ContactList extends Component {
   componentDidMount() {
     this.props.getContacts();
   }
+
+  onDeleteClick(id) {
+    this.props.deleteContact(id);
+  }
+
   render() {
     const { contacts } = this.props.contacts;
     return (
@@ -17,26 +30,39 @@ class ContactList extends Component {
           <span style={{ color: "#B71C1C", marginLeft: "20px" }}>Contact</span>{" "}
           List
         </h3>
-        {contacts.map(contact => (
-          <Container>
-            <Collapsible>
-              <CollapsibleItem header={contact.name} icon="place">
-                <span style={{ fontWeight: "bold" }}>Email: </span>
-                {contact.email}
-                <hr />
-                <span style={{ fontWeight: "bold" }}>Tel. Number: </span>
-                {contact.number}
-              </CollapsibleItem>
-            </Collapsible>
-          </Container>
-        ))}
+        <Container>
+          {contacts !== undefined ? (
+            contacts.map(contact => (
+              <div key={contact._id}>
+                <Collapsible style={{ position: "relative" }}>
+                  <Link to="contact-edit" className="edit-icon">
+                    <Icon>mode_edit</Icon>
+                  </Link>
+                  <div onClick={this.onDeleteClick.bind(this, contact._id)}>
+                    <Icon className="delete-icon">delete_forever</Icon>
+                  </div>
+                  <CollapsibleItem header={contact.name} icon="place">
+                    <span style={{ fontWeight: "bold" }}>Email: </span>
+                    {contact.email}
+                    <hr />
+                    <span style={{ fontWeight: "bold" }}>Tel. Number: </span>
+                    {contact.number}
+                  </CollapsibleItem>
+                </Collapsible>
+              </div>
+            ))
+          ) : (
+            <div>Loading...</div>
+          )}
+        </Container>
       </div>
     );
   }
 }
 
 ContactList.propTypes = {
-  getContacts: PropTypes.func.isRequired
+  getContacts: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -45,5 +71,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getContacts }
+  { getContacts, deleteContact }
 )(ContactList);

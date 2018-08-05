@@ -8,6 +8,7 @@ import store from "./store";
 import NavBar from "./components/layout/NavBar";
 import ContactAdd from "./components/forms/ContactAdd";
 import ContactList from "./components/contact-list/ContactList";
+import EditForm from "./components/forms/EditForm";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
             <NavBar style={{ width: "100%" }} />
             <Route exact path="/" component={ContactList} />
             <Route exact path="/contact-add" component={ContactAdd} />
+            <Route exact path="/contact-edit" component={EditForm} />
           </div>
         </Router>
       </Provider>

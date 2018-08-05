@@ -5,8 +5,8 @@ module.exports = function validateCreateInputs(data) {
   let errors = {};
 
   data.name = !isEmpty(data.name) ? data.name : "";
-  data.name = !isEmpty(data.email) ? data.email : "";
-  data.name = !isEmpty(data.number) ? data.number : "";
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.number = !isEmpty(data.number) ? data.number : "";
 
   // **** Name ****
   if (!Validator.isLength(data.name, { min: 4, max: 30 })) {

@@ -23,7 +23,7 @@ router.post("/create", (req, res) => {
 
   // Check validation
   if (!isValid) {
-    return res.status(400).res.json(errors);
+    return res.status(400).json(errors);
   }
 
   Contact.findOne({ email: req.body.email }).then(contact => {
@@ -31,12 +31,13 @@ router.post("/create", (req, res) => {
       errors.email = "Contact already exists";
       return res.status(400).json(errors);
     } else {
-      const newContact = new Contact({
+      const newContact = {
         name: req.body.name,
         email: req.body.email,
         number: req.body.number
-      });
-      newContact
+      };
+      console.log(newContact);
+      new Contact(newContact)
         .save()
         .then(contact => res.json(contact))
         .catch(err => console.log(err));
@@ -51,7 +52,7 @@ router.post("/edit/:id", (req, res) => {
 
   // Check validation
   if (!isValid) {
-    return res.status(400).res.json(errors);
+    return res.status(400).json(errors);
   }
   Contact.findById(req.params.id)
     .then(contact => {

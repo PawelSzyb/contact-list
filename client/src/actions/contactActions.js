@@ -1,8 +1,21 @@
-import { GET_CONTACTS, ADD_CONTACTS, GET_ERRORS } from "./types";
+import { GET_CONTACTS, GET_ERRORS } from "./types";
 import axios from "axios";
 
-export const getContacts = () => {
-  return {};
+export const getContacts = () => dispatch => {
+  axios
+    .get("/api/contacts")
+    .then(res =>
+      dispatch({
+        type: GET_CONTACTS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_CONTACTS,
+        payload: null
+      })
+    );
 };
 
 export const addContact = (contactData, history) => dispatch => {

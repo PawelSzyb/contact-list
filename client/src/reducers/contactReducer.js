@@ -1,11 +1,16 @@
-// import { GET_CONTACTS, ADD_CONTACTS } from "../actions/types";
+import { GET_CONTACTS } from "../actions/types";
 
 const initialState = {
-  users: {}
+  contacts: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload
+      };
     default:
       return state;
   }

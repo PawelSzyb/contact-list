@@ -1,3 +1,9 @@
 .active {
   width: 100%;
 }
+
+@media (max-width: 452px) {
+  .brand-logo {
+    white-space: nowrap;
+  }
+}

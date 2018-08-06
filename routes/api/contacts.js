@@ -54,15 +54,19 @@ router.post("/edit/:id", (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
+  const contactFields = {};
+  if (req.body.name) contactFields.name = req.body.name;
+  if (req.body.email) contactFields.email = req.body.email;
+  if (req.body.number) contactFields.number = req.body.number;
+
   Contact.findById(req.params.id)
     .then(contact => {
       if (contact) {
-        const number = parseInt(req.body.number);
-        Contact.findOneAndUpdate({
-          name: req.body.name,
-          email: req.body.email,
-          number
-        })
+        Contact.findOneAndUpdate(
+          { _id: req.params.id },
+          { $set: contactFields },
+          { new: true }
+        )
           .then(contact => res.json(contact))
           .catch(err => res.json(err));
       } else {

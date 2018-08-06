@@ -34,7 +34,7 @@ class ContactList extends Component {
         <Container>
           {contacts !== undefined ? (
             contacts.map(contact => (
-              <div key={contact._id}>
+              <div>
                 <Collapsible style={{ position: "relative" }}>
                   <Link
                     to={{ pathname: `/contact-edit/${contact._id}` }}

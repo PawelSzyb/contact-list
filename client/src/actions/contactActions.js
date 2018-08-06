@@ -48,3 +48,10 @@ export const deleteContact = id => dispatch => {
     .then(res => dispatch(getContacts()))
     .catch(err => console.log(err));
 };
+
+export const clearErrors = () => dispatch => {
+  dispatch({
+    type: GET_ERRORS,
+    payload: {}
+  });
+};

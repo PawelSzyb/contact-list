@@ -6,7 +6,11 @@ import PropTypes from "prop-types";
 
 import isEmpty from "../is-empty/IsEmpty";
 
-import { updateContact, getContacts } from "../../actions/contactActions";
+import {
+  updateContact,
+  getContacts,
+  clearErrors
+} from "../../actions/contactActions";
 
 class EditForm extends Component {
   constructor(props) {
@@ -19,38 +23,25 @@ class EditForm extends Component {
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
+    this.onSubmitClick = this.onSubmitClick.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmitClick(id) {
+  onSubmitClick() {
     const contactData = {
       name: this.state.name,
       email: this.state.email,
       number: this.state.number
     };
+    const { id } = this.props.match.params;
     this.props.updateContact(id, contactData, this.props.history);
   }
 
   componentDidMount() {
     this.props.getContacts();
-
-    // const { id } = this.props.match.params;
-    // const { contacts } = this.props.contacts;
-    // const contact = contacts.filter(contact => contact._id === id);
-
-    // contact.name = !isEmpty(contact.name) ? contact.name : "";
-    // contact.email = !isEmpty(contact.email) ? contact.email : "";
-    // contact.number = !isEmpty(contact.number) ? contact.number : "";
-
-    // contact !== undefined
-    //   ? this.setState({
-    //       name: contact.name,
-    //       email: contact.email,
-    //       number: contact.number
-    //     })
-    //   : null;
+    this.props.clearErrors();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,10 +65,6 @@ class EditForm extends Component {
   }
   render() {
     const { errors } = this.state;
-
-    const { id } = this.props.match.params;
-    // const { contacts } = this.props.contacts;
-    // const contact = contacts.filter(contact => contact._id === id);
 
     return (
       <Container>
@@ -121,7 +108,7 @@ class EditForm extends Component {
             />
             <Button
               type="submit"
-              onClick={this.onSubmitClick.bind(this, id)}
+              onClick={this.onSubmitClick}
               waves="light"
               style={{ backgroundColor: "#b71c1c", marginTop: "20px" }}
             >
@@ -147,5 +134,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateContact, getContacts }
+  { updateContact, getContacts, clearErrors }
 )(withRouter(EditForm));

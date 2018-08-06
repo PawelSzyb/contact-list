@@ -4,7 +4,9 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { updateContact } from "../../actions/contactActions";
+import isEmpty from "../is-empty/IsEmpty";
+
+import { updateContact, getContacts } from "../../actions/contactActions";
 
 class EditForm extends Component {
   constructor(props) {
@@ -31,14 +33,52 @@ class EditForm extends Component {
     this.props.updateContact(id, contactData, this.props.history);
   }
 
+  componentDidMount() {
+    this.props.getContacts();
+
+    // const { id } = this.props.match.params;
+    // const { contacts } = this.props.contacts;
+    // const contact = contacts.filter(contact => contact._id === id);
+
+    // contact.name = !isEmpty(contact.name) ? contact.name : "";
+    // contact.email = !isEmpty(contact.email) ? contact.email : "";
+    // contact.number = !isEmpty(contact.number) ? contact.number : "";
+
+    // contact !== undefined
+    //   ? this.setState({
+    //       name: contact.name,
+    //       email: contact.email,
+    //       number: contact.number
+    //     })
+    //   : null;
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
+    if (nextProps.contacts.contacts) {
+      const { id } = this.props.match.params;
+      const { contacts } = nextProps.contacts;
+      const contact = contacts.filter(contact => contact._id === id);
+
+      contact[0].name = !isEmpty(contact[0].name) ? contact[0].name : "";
+      contact[0].email = !isEmpty(contact[0].email) ? contact[0].email : "";
+      contact[0].number = !isEmpty(contact[0].number) ? contact[0].number : "";
+      this.setState({
+        name: contact[0].name,
+        email: contact[0].email,
+        number: contact[0].number
+      });
+    }
   }
   render() {
     const { errors } = this.state;
+
     const { id } = this.props.match.params;
+    // const { contacts } = this.props.contacts;
+    // const contact = contacts.filter(contact => contact._id === id);
+
     return (
       <Container>
         <Row
@@ -55,7 +95,7 @@ class EditForm extends Component {
               onChange={this.onChange}
               value={this.state.name}
               error={errors.name ? errors.name : null}
-              placeholder=""
+              placeholder="Name"
               label="Name"
             />
             <Input
@@ -63,7 +103,7 @@ class EditForm extends Component {
               name="email"
               type="email"
               label="Email"
-              placeholder=""
+              placeholder="Email"
               onChange={this.onChange}
               value={this.state.email}
               error={errors.email ? errors.email : null}
@@ -71,7 +111,7 @@ class EditForm extends Component {
             <Input
               type="text"
               name="number"
-              placeholder=""
+              placeholder="Number"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               label="Number"
               s={12}
@@ -96,14 +136,16 @@ class EditForm extends Component {
 
 EditForm.propTypes = {
   updateContact: PropTypes.func.isRequired,
+  getContacts: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  contacts: state.contacts
 });
 
 export default connect(
   mapStateToProps,
-  { updateContact }
-)(EditForm);
+  { updateContact, getContacts }
+)(withRouter(EditForm));

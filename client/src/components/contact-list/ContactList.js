@@ -9,6 +9,7 @@ import {
   Container,
   Icon
 } from "react-materialize";
+
 import "./ContactList.css";
 
 import { getContacts, deleteContact } from "../../actions/contactActions";

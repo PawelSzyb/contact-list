@@ -30,6 +30,18 @@ export const addContact = (contactData, history) => dispatch => {
     );
 };
 
+export const updateContact = (id, contactData, history) => dispatch => {
+  axios
+    .post(`/api/contacts/edit/${id}`, contactData)
+    .then(res => history.push("/"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 export const deleteContact = id => dispatch => {
   axios
     .delete(`api/contacts/${id}`)

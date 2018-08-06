@@ -35,7 +35,10 @@ class ContactList extends Component {
             contacts.map(contact => (
               <div key={contact._id}>
                 <Collapsible style={{ position: "relative" }}>
-                  <Link to="contact-edit" className="edit-icon">
+                  <Link
+                    to={{ pathname: `/contact-edit/${contact._id}` }}
+                    className="edit-icon"
+                  >
                     <Icon>mode_edit</Icon>
                   </Link>
                   <div onClick={this.onDeleteClick.bind(this, contact._id)}>

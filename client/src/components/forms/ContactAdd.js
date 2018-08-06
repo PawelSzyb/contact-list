@@ -48,6 +48,10 @@ class ContactAdd extends Component {
           style={{ display: "flex", justifyContent: "center", float: "none" }}
         >
           <Col s={12} m={8} l={6} style={{ margin: "20px auto" }}>
+            <h3>
+              <span style={{ color: "rgb(183, 28, 28)" }}>Add </span> New
+              Contact
+            </h3>
             <Input
               s={12}
               name="name"

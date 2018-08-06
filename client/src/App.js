@@ -19,7 +19,7 @@ class App extends Component {
             <NavBar style={{ width: "100%" }} />
             <Route exact path="/" component={ContactList} />
             <Route exact path="/contact-add" component={ContactAdd} />
-            <Route exact path="/contact-edit" component={EditForm} />
+            <Route exact path="/contact-edit/:id" component={EditForm} />
           </div>
         </Router>
       </Provider>

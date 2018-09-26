@@ -15,8 +15,15 @@ import "./ContactList.css";
 import { getContacts, deleteContact } from "../../actions/contactActions";
 
 class ContactList extends Component {
+  state = {
+    contacts: []
+  };
   componentDidMount() {
     this.props.getContacts();
+    setTimeout(
+      () => this.setState({ contacts: this.props.contacts.contacts }),
+      2000
+    );
   }
 
   onDeleteClick(id) {
@@ -24,7 +31,7 @@ class ContactList extends Component {
   }
 
   render() {
-    const { contacts } = this.props.contacts;
+    const { contacts } = this.state;
     return (
       <div>
         <h3>
@@ -34,7 +41,7 @@ class ContactList extends Component {
         <Container>
           {contacts !== undefined ? (
             contacts.map(contact => (
-              <div>
+              <React.Fragment key={contact._id}>
                 <Collapsible style={{ position: "relative" }}>
                   <Link
                     to={{ pathname: `/contact-edit/${contact._id}` }}
@@ -53,7 +60,7 @@ class ContactList extends Component {
                     {contact.number}
                   </CollapsibleItem>
                 </Collapsible>
-              </div>
+              </React.Fragment>
             ))
           ) : (
             <div>Loading...</div>

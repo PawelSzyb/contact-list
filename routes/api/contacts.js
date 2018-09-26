@@ -36,7 +36,6 @@ router.post("/create", (req, res) => {
         email: req.body.email,
         number: req.body.number
       };
-      console.log(newContact);
       new Contact(newContact)
         .save()
         .then(contact => res.json(contact))

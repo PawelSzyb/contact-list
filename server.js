@@ -2,16 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
+const passport = require("passport");
 
 const contacts = require("./routes/api/contacts");
 const users = require("./routes/api/users");
 
 const app = express();
-
-// Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(bodyParser.json());
 
 // db config
 const db = require("./config/keys").mongoURI;
@@ -20,6 +16,16 @@ mongoose
   .connect(db)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Passport
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport.js")(passport);
 
 // use routes
 app.use("/api/contacts", contacts);
@@ -37,4 +43,4 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Port running on port ${port}`));
+app.listen(port, () => console.log(`Server running on port ${port}`));

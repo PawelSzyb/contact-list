@@ -112,7 +112,8 @@ class EditForm extends Component {
               waves="light"
               style={{ backgroundColor: "#b71c1c", marginTop: "20px" }}
             >
-              Edit<Icon right>mode_edit</Icon>
+              Edit
+              <Icon right>mode_edit</Icon>
             </Button>
           </Col>
         </Row>

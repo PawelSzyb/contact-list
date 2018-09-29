@@ -22,7 +22,7 @@ class ContactList extends Component {
     this.props.getContacts();
     setTimeout(
       () => this.setState({ contacts: this.props.contacts.contacts }),
-      2000
+      500
     );
   }
 

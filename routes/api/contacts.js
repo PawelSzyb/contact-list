@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 const Contact = require("../../models/Contact");
 
@@ -8,13 +9,17 @@ const validateCreateInputs = require("../../validation/create");
 
 // @route   GET api/contacts
 // @desc    test route
-router.get("/", (req, res) => {
-  Contact.find()
-    .then(contacts => res.json(contacts))
-    .catch(err =>
-      res.status(400).json({ nocontactsfound: "No contacts found" })
-    );
-});
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Contact.find()
+      .then(contacts => res.json(contacts))
+      .catch(err =>
+        res.status(400).json({ nocontactsfound: "No contacts found" })
+      );
+  }
+);
 
 // @route   POST api/contacts/create
 // @desc    creating new contact

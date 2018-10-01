@@ -38,8 +38,8 @@ class Register extends Component {
         <Row
           style={{ display: "flex", justifyContent: "center", float: "none" }}
         >
-          <h3>Register</h3>
           <Col s={12} m={8} l={6} style={{ margin: "20px auto" }}>
+            <h3>Register</h3>
             <Input
               onChange={this.onChangeHandle}
               name="name"

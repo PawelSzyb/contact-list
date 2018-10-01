@@ -11,6 +11,7 @@ import ContactList from "./components/contact-list/ContactList";
 import EditForm from "./components/forms/EditForm";
 import Register from "./components/credentials/Register";
 import Login from "./components/credentials/Login";
+import LandingPage from "./components/landing/LandingPage";
 
 class App extends Component {
   render() {
@@ -19,7 +20,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar style={{ width: "100%" }} />
-            <Route exact path="/" component={ContactList} />
+            <Route exact path="/" component={LandingPage} />
             <Route exact path="/contact-add" component={ContactAdd} />
             <Route exact path="/contact-edit/:id" component={EditForm} />
             <Route exact path="/register" component={Register} />

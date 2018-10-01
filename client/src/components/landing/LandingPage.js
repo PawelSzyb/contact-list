@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <div>
       <h2 style={{ textAlign: "center", marginTop: "60px" }}>
-        Welcome to <span style={{ color: "rgb(183, 28, 28)" }}>Contact</span>
+        Welcome to <span style={{ color: "rgb(183, 28, 28)" }}>Contact </span>
         Manager
       </h2>
       <div

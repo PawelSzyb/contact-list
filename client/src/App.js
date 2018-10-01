@@ -10,6 +10,7 @@ import ContactAdd from "./components/forms/ContactAdd";
 import ContactList from "./components/contact-list/ContactList";
 import EditForm from "./components/forms/EditForm";
 import Register from "./components/credentials/Register";
+import Login from "./components/credentials/Login";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/contact-add" component={ContactAdd} />
             <Route exact path="/contact-edit/:id" component={EditForm} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
           </div>
         </Router>
       </Provider>

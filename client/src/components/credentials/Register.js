@@ -9,8 +9,16 @@ class Register extends Component {
     name: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
+    errors: {}
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChangeHandle = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -24,15 +32,20 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history);
   };
   render() {
+    const { errors } = this.state;
     return (
       <Container>
-        <Row>
-          <Col m={12} l={8} style={{ marginTop: "30px" }}>
+        <Row
+          style={{ display: "flex", justifyContent: "center", float: "none" }}
+        >
+          <h3>Register</h3>
+          <Col s={12} m={8} l={6} style={{ margin: "20px auto" }}>
             <Input
               onChange={this.onChangeHandle}
               name="name"
               s={12}
               label="First Name"
+              error={errors.name ? errors.name : null}
             />
             <Input
               onChange={this.onChangeHandle}
@@ -40,6 +53,7 @@ class Register extends Component {
               type="email"
               label="Email"
               s={12}
+              error={errors.email ? errors.email : null}
             />
             <Input
               onChange={this.onChangeHandle}
@@ -47,6 +61,7 @@ class Register extends Component {
               type="password"
               label="Password"
               s={12}
+              error={errors.password ? errors.password : null}
             />
             <Input
               onChange={this.onChangeHandle}
@@ -54,11 +69,12 @@ class Register extends Component {
               type="password"
               label="Confirm Password"
               s={12}
+              error={errors.password2 ? errors.password2 : null}
             />
             <Button
               onClick={this.onSubmitHandle}
               waves="light"
-              style={{ backgroundColor: "#b71c1c" }}
+              style={{ backgroundColor: "#b71c1c", marginTop: "30px" }}
             >
               Register
             </Button>

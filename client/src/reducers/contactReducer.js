@@ -1,10 +1,10 @@
-import { REGISTER_USER } from "../actions/types";
+import { GET_CONTACTS } from "../actions/types";
 
 const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case REGISTER_USER:
+    case GET_CONTACTS:
       return {
         ...state,
         contacts: action.payload

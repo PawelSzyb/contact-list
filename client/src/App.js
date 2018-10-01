@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import jwt_decode from "jwt-decode";
 import { Provider } from "react-redux";
+
+import setAuthHeader from "./utils/setAuthToken";
+import { setCurrentUser } from "./actions/authActions";
 import store from "./store";
 
 import NavBar from "./components/layout/NavBar";
@@ -16,6 +19,15 @@ import Info from "./components/layout/Info";
 
 class App extends Component {
   render() {
+    // check for token
+    if (localStorage.jwtToken) {
+      // set auth header
+      setAuthHeader(localStorage.jwtToken);
+      // decode user info
+      const decode = jwt_decode(localStorage.jwtToken);
+      // set current user
+      store.dispatch(setCurrentUser(decode));
+    }
     return (
       <Provider store={store}>
         <Router>

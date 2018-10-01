@@ -17,10 +17,10 @@
 
 @media (min-width: 993px) {
   .navbar-content {
-    width: 300px;
+    width: 500px;
     flex-direction: row;
     display: flex;
-    margin-right: 180px;
+    margin-right: 15px;
     align-items: center;
     height: 64px;
   }

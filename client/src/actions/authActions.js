@@ -29,7 +29,7 @@ export const loginUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .then(res => history.push("/"))
+    .then(res => history.push("/contacts"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -45,6 +45,11 @@ export const setCurrentUser = decoded => {
   };
 };
 
-export const logoutUser = () => {
+export const logoutUser = () => dispatch => {
+  // remove token from ls
   localStorage.removeItem("jwtToken");
+  // remove auth header from every request
+  setAuthToken(false);
+  // set current user to {}
+  dispatch(setCurrentUser({}));
 };

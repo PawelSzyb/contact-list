@@ -1,9 +1,9 @@
 import { GET_CONTACTS, GET_ERRORS } from "./types";
 import axios from "axios";
 
-export const getContacts = user_id => dispatch => {
+export const getContacts = () => dispatch => {
   axios
-    .get("/api/contacts/contacts-list")
+    .get("/api/contacts")
     .then(res =>
       dispatch({
         type: GET_CONTACTS,

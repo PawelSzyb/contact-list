@@ -39,8 +39,10 @@ router.post("/create", (req, res) => {
       const newContact = {
         name: req.body.name,
         email: req.body.email,
-        number: req.body.number
+        number: req.body.number,
+        user_id: req.body.user_id
       };
+      console.log(newContact);
       new Contact(newContact)
         .save()
         .then(contact => res.json(contact))

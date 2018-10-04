@@ -34,6 +34,7 @@ class App extends Component {
           <div className="App">
             <NavBar style={{ width: "100%" }} />
             <Route exact path="/" component={LandingPage} />
+            <Route exact path="/contacts" component={ContactList} />
             <Route exact path="/contact-add" component={ContactAdd} />
             <Route exact path="/contact-edit/:id" component={EditForm} />
             <Route exact path="/register" component={Register} />

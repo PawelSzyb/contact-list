@@ -26,10 +26,12 @@ class ContactAdd extends Component {
   }
 
   onSubmitClick() {
+    const { id } = this.props.credentials.user;
     const contactData = {
       name: this.state.name,
       email: this.state.email,
-      number: this.state.number
+      number: this.state.number,
+      user_id: id
     };
     this.props.addContact(contactData, this.props.history);
   }
@@ -88,7 +90,8 @@ class ContactAdd extends Component {
               waves="light"
               style={{ backgroundColor: "#b71c1c", marginTop: "20px" }}
             >
-              Add<Icon right>add</Icon>
+              Add
+              <Icon right>add</Icon>
             </Button>
           </Col>
         </Row>
@@ -103,7 +106,8 @@ ContactAdd.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
+  credentials: state.credentials
 });
 
 export default connect(

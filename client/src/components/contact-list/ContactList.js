@@ -20,10 +20,15 @@ class ContactList extends Component {
   };
   componentDidMount() {
     this.props.getContacts();
-    setTimeout(
-      () => this.setState({ contacts: this.props.contacts.contacts }),
-      500
-    );
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.contacts) {
+      const contactsList = nextProps.contacts.contacts.filter(contact => {
+        const user_id = this.props.credentials.user.id;
+        return contact.user_id === user_id;
+      });
+      this.setState({ contacts: contactsList });
+    }
   }
 
   onDeleteClick(id) {
@@ -73,11 +78,14 @@ class ContactList extends Component {
 
 ContactList.propTypes = {
   getContacts: PropTypes.func.isRequired,
-  deleteContact: PropTypes.func.isRequired
+  deleteContact: PropTypes.func.isRequired,
+  contacts: PropTypes.object.isRequired,
+  credentials: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  contacts: state.contacts
+  contacts: state.contacts,
+  credentials: state.credentials
 });
 
 export default connect(

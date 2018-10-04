@@ -44,7 +44,7 @@ class Register extends Component {
               onChange={this.onChangeHandle}
               name="name"
               s={12}
-              label="First Name"
+              label="Name"
               error={errors.name ? errors.name : null}
             />
             <Input

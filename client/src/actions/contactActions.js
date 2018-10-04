@@ -1,7 +1,7 @@
 import { GET_CONTACTS, GET_ERRORS } from "./types";
 import axios from "axios";
 
-export const getContacts = () => dispatch => {
+export const getContacts = user_id => dispatch => {
   axios
     .get("/api/contacts")
     .then(res =>
@@ -21,7 +21,7 @@ export const getContacts = () => dispatch => {
 export const addContact = (contactData, history) => dispatch => {
   axios
     .post("/api/contacts/create", contactData)
-    .then(res => history.push("/"))
+    .then(res => history.push("/contacts"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

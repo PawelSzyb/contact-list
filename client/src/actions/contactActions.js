@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getContacts = user_id => dispatch => {
   axios
-    .get("/api/contacts")
+    .get("/api/contacts/contacts-list")
     .then(res =>
       dispatch({
         type: GET_CONTACTS,

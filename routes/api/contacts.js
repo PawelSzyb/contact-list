@@ -10,7 +10,7 @@ const validateCreateInputs = require("../../validation/create");
 // @route   GET api/contacts
 // @desc    test route
 router.get(
-  "/",
+  "/contacts-list",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Contact.find()

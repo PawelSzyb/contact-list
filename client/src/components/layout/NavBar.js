@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, Icon } from "react-materialize";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import PropTypes from "prop-types";
@@ -11,7 +11,6 @@ class NavBar extends Component {
   onClickHandle = e => {
     e.preventDefault();
     this.props.logoutUser();
-    this.props.history.push("/");
   };
   render() {
     const { isAuthenticated } = this.props.credentials;
@@ -75,4 +74,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser }
-)(withRouter(NavBar));
+)(NavBar);
